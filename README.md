@@ -1,1 +1,1 @@
-# photograph-portfolio-server
+# Server part of a portfolio site for a photographer
