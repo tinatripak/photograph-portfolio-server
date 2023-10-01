@@ -15,30 +15,37 @@ const GetAllHomePhotos = async (req, res) => {
   }
 };
 
+const GetHomePhotoById = async (req, res) => {
+  try {
+
+    const {id} = req.params;
+    const response = await Home.findById(id);
+
+    if (response) {
+      res.status(200).send({ success: true, data: response });
+    } else {
+      res.status(200).send({ success: true, msg: "No Data Found" });
+    }
+  } catch (error) {
+    res.status(500).send({ success: false, msg: error });
+  }
+};
+
 const CreateHomePhotos = async (req, res) => {
   try {
     const {
-      mainPhoto,
-      firstGridPhoto,
-      secondGridPhoto,
-      thirdGridPhoto,
-      fourthGridPhoto,
-      fifthGridPhoto,
-      sixthGridPhoto
+      titleOfPhoto,
+      photo
     } = req.body;
     
-    const home = await Home.create({
-      mainPhoto,
-      firstGridPhoto,
-      secondGridPhoto,
-      thirdGridPhoto,
-      fourthGridPhoto,
-      fifthGridPhoto,
-      sixthGridPhoto,
-      createdAt: new Date(),
+    const home = new Home({
+      titleOfPhoto : titleOfPhoto,
+      photo : photo,
+      createdAt : new Date(),
     });
+    home.save()
+
     res
-      .status(201)
       .json({
         message: "Home photos created in successfully",
         success: true,
@@ -49,27 +56,15 @@ const CreateHomePhotos = async (req, res) => {
   }
 };
 
-const UpdateHomePhotos = async (req, res) => {
+const UpdateHomePhoto = async (req, res) => {
   try {
     const {
-      mainPhoto,
-      firstGridPhoto,
-      secondGridPhoto,
-      thirdGridPhoto,
-      fourthGridPhoto,
-      fifthGridPhoto,
-      sixthGridPhoto,
+      photo,
     } = req.body;
     const result = await Home.findOneAndUpdate(
       { _id: req.params.id },
       {
-        mainPhoto: mainPhoto,
-        firstGridPhoto: firstGridPhoto,
-        secondGridPhoto: secondGridPhoto,
-        thirdGridPhoto: thirdGridPhoto,
-        fourthGridPhoto: fourthGridPhoto,
-        fifthGridPhoto: fifthGridPhoto,
-        sixthGridPhoto: sixthGridPhoto,
+        photo: photo,
       },
       {
         upsert: true,
@@ -81,4 +76,4 @@ const UpdateHomePhotos = async (req, res) => {
     res.status(400).send({ success: false, msg: error });
   }
 };
-module.exports = { CreateHomePhotos, GetAllHomePhotos, UpdateHomePhotos };
+module.exports = { CreateHomePhotos, GetAllHomePhotos, GetHomePhotoById, UpdateHomePhoto };

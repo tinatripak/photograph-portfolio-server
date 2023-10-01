@@ -15,6 +15,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Your password is required"],
   },
+  photo: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now
