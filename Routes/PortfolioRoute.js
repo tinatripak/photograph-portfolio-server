@@ -2,14 +2,18 @@ const {
   GetPhotoshootById,
   GetPhotoshoots,
   CreatePhotoshoot,
-  UpdatePhotoshoot,
+  UpdatePhotoshootById,
+  DeletePhotoshootById,
+  GetPhotoshootByName
 } = require("../Controllers/PortfolioController");
 
 const router = require("express").Router();
 
 router.get("/getPhotoshoots", GetPhotoshoots);
-router.get("/getPhotoshootById", GetPhotoshootById);
+router.get("/getPhotoshootById/:id", GetPhotoshootById);
+router.get("/getPhotoshootByName/:name", GetPhotoshootByName);
 router.post("/createPhotoshoot", CreatePhotoshoot);
-router.put("/updatePhotoshoot/:id", UpdatePhotoshoot);
+router.put("/updatePhotoshootById/:id", UpdatePhotoshootById);
+router.delete("/deletePhotoshootById/:id", DeletePhotoshootById);
 
 module.exports = router;

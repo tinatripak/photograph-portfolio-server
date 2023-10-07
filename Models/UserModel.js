@@ -17,10 +17,10 @@ const userSchema = new mongoose.Schema({
   },
   photo: {
     type: String,
+    required: [true, "Your photo is required"],
   },
   createdAt: {
     type: Date,
-    default: Date.now
   },
 });
 
@@ -28,4 +28,4 @@ userSchema.pre("save", async function () {
   this.password = bcrypt.hash(this.password, 12);
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("users", userSchema);

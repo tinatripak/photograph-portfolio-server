@@ -45,5 +45,5 @@ app.use("/admin", adminRoute);
 app.use("/booking", bookingRoute);
 app.use("/portfolio", portfolioRoute);
 app.use("/photographer", photographerRoute);
-app.use("/typesOfPhotoshoot", typesOfPhotoshootRoute);
+app.use("/typesOfPhotography", typesOfPhotoshootRoute);
 

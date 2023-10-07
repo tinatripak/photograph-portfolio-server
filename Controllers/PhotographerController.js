@@ -1,6 +1,35 @@
 const Photographer = require("../Models/PhotographerModel");
 
-const createPhotographerInfo = async (req, res) => {
+const getPhotographerBio = async (req, res) => {
+  try {
+    const response = await Photographer.find({});
+
+    if (response) {
+      res.status(200).send({ success: true, data: response });
+    } else {
+      res.status(200).send({ success: true, msg: "No bio found" });
+    }
+  } catch (error) {
+    res.status(500).send({ success: false, msg: error });
+  }
+};
+
+const getPhotographerBioById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await Photographer.findById(id);
+
+    if (response) {
+      res.status(200).send({ success: true, data: response });
+    } else {
+      res.status(200).send({ success: true, msg: "No bio found by ID" });
+    }
+  } catch (error) {
+    res.status(500).send({ success: false, msg: error });
+  }
+};
+
+const createPhotographerBio = async (req, res) => {
   try {
     const { bio, phoneNumber, photo } = req.body;
     const photographer = new Photographer({
@@ -12,7 +41,7 @@ const createPhotographerInfo = async (req, res) => {
     photographer.save();
 
     res.json({
-      message: "Photographer info created",
+      message: "Bio successfully created",
       success: true,
       data: photographer,
     });
@@ -21,7 +50,7 @@ const createPhotographerInfo = async (req, res) => {
   }
 };
 
-const updatePhotographerInfo = async (req, res) => {
+const updatePhotographerBioById = async (req, res) => {
   try {
     const { bio, phoneNumber, photo } = req.body;
     const result = await Photographer.findOneAndUpdate(
@@ -37,7 +66,7 @@ const updatePhotographerInfo = async (req, res) => {
       }
     );
     res.json({
-      message: "Phone number is updated",
+      message: "Bio successfully updated",
       success: true,
       data: result,
     });
@@ -46,38 +75,9 @@ const updatePhotographerInfo = async (req, res) => {
   }
 };
 
-const getPhotographerInfo = async (req, res) => {
-  try {
-    const response = await Photographer.find({});
-
-    if (response) {
-      res.status(200).send({ success: true, data: response });
-    } else {
-      res.status(200).send({ success: true, msg: "No Data Found" });
-    }
-  } catch (error) {
-    res.status(500).send({ success: false, msg: error });
-  }
-};
-
-const getPhotographerInfoById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const response = await Photographer.findById(id);
-
-    if (response) {
-      res.status(200).send({ success: true, data: response });
-    } else {
-      res.status(200).send({ success: true, msg: "No Data Found" });
-    }
-  } catch (error) {
-    res.status(500).send({ success: false, msg: error });
-  }
-};
-
 module.exports = {
-  getPhotographerInfo,
-  createPhotographerInfo,
-  updatePhotographerInfo,
-  getPhotographerInfoById,
+  getPhotographerBio,
+  getPhotographerBioById,
+  createPhotographerBio,
+  updatePhotographerBioById,
 };

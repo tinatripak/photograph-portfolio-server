@@ -11,8 +11,7 @@ const homeSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now
   },
 });
 
-module.exports = mongoose.model("Home", homeSchema);
+module.exports = mongoose.model("homes", homeSchema);

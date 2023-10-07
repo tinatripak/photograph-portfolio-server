@@ -1,17 +1,19 @@
 const {
   GetAllBookings,
+  GetTheBookingById,
   CreateABooking,
-  AcceptABooking,
-  DeclineABooking,
-  DeleteADeclinedBooking
+  AcceptTheBookingById,
+  DeclineTheBookingById,
+  DeleteTheDeclinedBookingById,
 } = require("../Controllers/BookingController");
 
 const router = require("express").Router();
 
 router.get("/getAllBookings", GetAllBookings);
-router.post("/createABookingForAPhotoshoot", CreateABooking);
-router.put("/acceptABookingForAPhotoshoot/:id", AcceptABooking);
-router.put("/declineABookingForAPhotoshoot/:id", DeclineABooking);
-router.delete("/deleteADeclinedBooking/:id", DeleteADeclinedBooking);
+router.get("/getTheBookingById", GetTheBookingById);
+router.post("/createABooking", CreateABooking);
+router.put("/acceptTheBooking/:id", AcceptTheBookingById);
+router.put("/declineTheBooking/:id", DeclineTheBookingById);
+router.delete("/deleteTheDeclinedBooking/:id", DeleteTheDeclinedBookingById);
 
 module.exports = router;

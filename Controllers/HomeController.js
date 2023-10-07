@@ -1,6 +1,5 @@
 const Home = require("../Models/HomeModel");
 
-
 const GetAllHomePhotos = async (req, res) => {
   try {
     const response = await Home.find({});
@@ -8,7 +7,7 @@ const GetAllHomePhotos = async (req, res) => {
     if (response) {
       res.status(200).send({ success: true, data: response });
     } else {
-      res.status(200).send({ success: true, msg: "No Data Found" });
+      res.status(200).send({ success: true, msg: "No photos found for homepage" });
     }
   } catch (error) {
     res.status(500).send({ success: false, msg: error });
@@ -17,50 +16,43 @@ const GetAllHomePhotos = async (req, res) => {
 
 const GetHomePhotoById = async (req, res) => {
   try {
-
-    const {id} = req.params;
+    const { id } = req.params;
     const response = await Home.findById(id);
 
     if (response) {
       res.status(200).send({ success: true, data: response });
     } else {
-      res.status(200).send({ success: true, msg: "No Data Found" });
+      res.status(200).send({ success: true, msg: "No homepage photo found for id" });
     }
   } catch (error) {
     res.status(500).send({ success: false, msg: error });
   }
 };
 
-const CreateHomePhotos = async (req, res) => {
+const CreateHomePhoto = async (req, res) => {
   try {
-    const {
-      titleOfPhoto,
-      photo
-    } = req.body;
-    
-    const home = new Home({
-      titleOfPhoto : titleOfPhoto,
-      photo : photo,
-      createdAt : new Date(),
-    });
-    home.save()
+    const { titleOfPhoto, photo } = req.body;
 
-    res
-      .json({
-        message: "Home photos created in successfully",
-        success: true,
-        data: home,
-      });
+    const home = new Home({
+      titleOfPhoto: titleOfPhoto,
+      photo: photo,
+      createdAt: new Date(),
+    });
+    home.save();
+
+    res.json({
+      message: "Homepage photo successfully created",
+      success: true,
+      data: home,
+    });
   } catch (error) {
     res.status(500).send({ success: false, msg: error });
   }
 };
 
-const UpdateHomePhoto = async (req, res) => {
+const UpdateHomePhotoById = async (req, res) => {
   try {
-    const {
-      photo,
-    } = req.body;
+    const { photo } = req.body;
     const result = await Home.findOneAndUpdate(
       { _id: req.params.id },
       {
@@ -71,9 +63,16 @@ const UpdateHomePhoto = async (req, res) => {
         new: true,
       }
     );
-    res.status(200).send({ data: result });
+    res.status(200).send({ message: "Homepage photo successfully updated",
+    success: true,
+    data: result, });
   } catch (error) {
     res.status(400).send({ success: false, msg: error });
   }
 };
-module.exports = { CreateHomePhotos, GetAllHomePhotos, GetHomePhotoById, UpdateHomePhoto };
+module.exports = {
+  CreateHomePhoto,
+  GetAllHomePhotos,
+  GetHomePhotoById,
+  UpdateHomePhotoById,
+};

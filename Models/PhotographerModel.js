@@ -17,8 +17,7 @@ const photographerSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now
   },
 });
 
-module.exports = mongoose.model("Photographer", photographerSchema);
+module.exports = mongoose.model("photographers", photographerSchema);

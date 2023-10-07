@@ -1,4 +1,4 @@
-const Calendar = require("../Models/Calendar");
+const Calendar = require("../Models/CalendarModel");
 
 const GetAllBookings = async (req, res) => {
   try {
@@ -7,7 +7,21 @@ const GetAllBookings = async (req, res) => {
     if (response) {
       res.status(200).send({ success: true, data: response });
     } else {
-      res.status(200).send({ success: true, msg: "No Data Found" });
+      res.status(200).send({ success: true, msg: "No bookings found" });
+    }
+  } catch (error) {
+    res.status(500).send({ success: false, msg: error });
+  }
+};
+
+const GetTheBookingById = async (req, res) => {
+  try {
+    const response = await Calendar.findById(req.params.id);
+
+    if (response) {
+      res.status(200).send({ success: true, data: response });
+    } else {
+      res.status(200).send({ success: true, msg: "No booking found by ID" });
     }
   } catch (error) {
     res.status(500).send({ success: false, msg: error });
@@ -24,7 +38,7 @@ const CreateABooking = async (req, res) => {
       date,
       status,
     } = req.body;
-    const existingUser = await Calendar.findOne({ email }); //findMany
+    const existingUser = await Calendar.findOne({ email });
     if (existingUser.date === date) {
       return res.json({
         message: "User already booked a photoshoot for this date",
@@ -43,7 +57,7 @@ const CreateABooking = async (req, res) => {
     res
       .status(201)
       .json({
-        message: "User booked a photoshoot in successfully",
+        message: "User successfully booked a photoshoot",
         success: true,
         data: reservation,
       });
@@ -52,7 +66,7 @@ const CreateABooking = async (req, res) => {
   }
 };
 
-const AcceptABooking = async (req, res) => {
+const AcceptTheBookingById = async (req, res) => {
   try {
     const id = req.params.id;
     const existingReservation = await Calendar.findOne({ _id: id });
@@ -65,20 +79,20 @@ const AcceptABooking = async (req, res) => {
       res
         .status(201)
         .json({
-          message: "Reservation for the photo shoot is accepted",
+          message: "Booking for the photo shoot is accepted",
           success: true,
           data: reservation,
         });
         
     } else {
-      console.error("Reservation doesnt exist");
+      console.error("Booking doesnt exist");
     }
   } catch (error) {
     res.status(500).send({ success: false, msg: error });
   }
 };
 
-const DeclineABooking = async (req, res) => {
+const DeclineTheBookingById = async (req, res) => {
   try {
     const id = req.params.id;
     const existingReservation = await Calendar.findOne({ _id: id });
@@ -91,28 +105,28 @@ const DeclineABooking = async (req, res) => {
       res
         .status(201)
         .json({
-          message: "Reservation for the photo shoot is declined",
+          message: "Booking for the photo shoot is declined",
           success: true,
           data: reservation,
         });
         
     } else {
-      console.error("Reservation doesnt exist");
+      console.error("Booking doesnt exist");
     }
   } catch (error) {
     res.status(500).send({ success: false, msg: error });
   }
 };
 
-const DeleteADeclinedBooking = async (req, res) => {
+const DeleteTheDeclinedBookingById = async (req, res) => {
   try {
     const deletedRes = await Calendar.deleteOne({
       _id: req.params.id,
     });
     if (deletedRes.deletedCount === 1) {
-      res.status(200).send({ success: true, msg: "Data Deleted" });
+      res.status(200).send({ success: true, msg: "The booking has been removed" });
     } else {
-      res.status(200).send({ success: false, msg: "Data Not Found" });
+      res.status(200).send({ success: false, msg: "No booking found" });
     }
   } catch (error) {
     res.status(500).send({ success: false, msg: error });
@@ -121,8 +135,9 @@ const DeleteADeclinedBooking = async (req, res) => {
 
 module.exports = {
   GetAllBookings,
+  GetTheBookingById,
   CreateABooking,
-  AcceptABooking,
-  DeclineABooking,
-  DeleteADeclinedBooking
+  AcceptTheBookingById,
+  DeclineTheBookingById,
+  DeleteTheDeclinedBookingById,
 };

@@ -1,16 +1,16 @@
 const {
-    CreateHomePhotos, 
+    CreateHomePhoto, 
     GetAllHomePhotos, 
     GetHomePhotoById,
-    UpdateHomePhoto
+    UpdateHomePhotoById
   } = require("../Controllers/HomeController");
   
   const router = require("express").Router();
   
-  router.post("/createHomePhotos", CreateHomePhotos);
-  router.get("/getHomePhotos", GetAllHomePhotos);
-  router.get("/getPhotoById/:id", GetHomePhotoById);
-  router.put("/updateHomePhoto/:id", UpdateHomePhoto);
+  router.post("/createHomePhoto", CreateHomePhoto);
+  router.get("/getAllHomePhotos", GetAllHomePhotos);
+  router.get("/getHomePhotoById/:id", GetHomePhotoById);
+  router.put("/updateHomePhotoById/:id", UpdateHomePhotoById);
   
   module.exports = router;
   

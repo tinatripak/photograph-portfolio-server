@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 
 const typeOfPhotoshootSchema = new mongoose.Schema({
-  typeOfPhotosession: {
+  typeOfPhotography: {
     type: String,
+    required: [true, "The type of the photography is required"],
     unique: true,
-    required: [true, "The type of the photosession is required"],
   },
+
   mainPhoto: {
     type: String,
     required: [true, "The main photo is required"],
@@ -16,8 +17,7 @@ const typeOfPhotoshootSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now
   },
 });
 
-module.exports = mongoose.model("TypeOfPhotoshoot", typeOfPhotoshootSchema);
+module.exports = mongoose.model("typeofphotoshoots", typeOfPhotoshootSchema);

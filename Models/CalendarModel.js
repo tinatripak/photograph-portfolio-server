@@ -13,9 +13,9 @@ const calendarSchema = new mongoose.Schema({
     type: String,
     required: [true, "The message is required"],
   },
-  typeOfPhotosession: {
+  typeOfPhotography: {
     type: String,
-    required: [true, "The type of photosession is required"],
+    required: [true, "The type of photography is required"],
   },
   date: {
     type: String,
@@ -23,13 +23,13 @@ const calendarSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: 'not defined',
+    default: "not defined",
     required: [true, "The status is required"],
   },
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
 });
 
-module.exports = mongoose.model("Calendar", calendarSchema);
+module.exports = mongoose.model("calendars", calendarSchema);

@@ -6,9 +6,9 @@ const photoshootSchema = new mongoose.Schema({
     required: [true, "The name is required"],
     unique: true,
   },
-  typeOfPhotosession: {
+  photoTypeId: {
     type: String,
-    required: [true, "The type of the photosession is required"],
+    required: [true, "The type of the photography is required"],
   },
   mainPhoto: {
     type: String,
@@ -20,8 +20,7 @@ const photoshootSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now
   },
 });
 
-module.exports = mongoose.model("Photoshoot", photoshootSchema);
+module.exports = mongoose.model("photoshoots", photoshootSchema);
