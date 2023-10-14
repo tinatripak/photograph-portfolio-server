@@ -6,7 +6,11 @@ const typeOfPhotoshootSchema = new mongoose.Schema({
     required: [true, "The type of the photography is required"],
     unique: true,
   },
-
+  shootingDuration: {
+    type: String,
+    required: [true, "The duration of shooting is required"],
+    default: "2 hours",
+  },
   mainPhoto: {
     type: String,
     required: [true, "The main photo is required"],

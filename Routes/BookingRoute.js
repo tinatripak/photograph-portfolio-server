@@ -10,7 +10,7 @@ const {
 const router = require("express").Router();
 
 router.get("/getAllBookings", GetAllBookings);
-router.get("/getTheBookingById", GetTheBookingById);
+router.get("/getTheBookingById/:id", GetTheBookingById);
 router.post("/createABooking", CreateABooking);
 router.put("/acceptTheBooking/:id", AcceptTheBookingById);
 router.put("/declineTheBooking/:id", DeclineTheBookingById);

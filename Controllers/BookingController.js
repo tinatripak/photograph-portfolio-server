@@ -1,8 +1,8 @@
-const Calendar = require("../Models/CalendarModel");
+const Booking = require("../Models/BookingModel");
 
 const GetAllBookings = async (req, res) => {
   try {
-    const response = await Calendar.find({});
+    const response = await Booking.find({});
 
     if (response) {
       res.status(200).send({ success: true, data: response });
@@ -16,7 +16,7 @@ const GetAllBookings = async (req, res) => {
 
 const GetTheBookingById = async (req, res) => {
   try {
-    const response = await Calendar.findById(req.params.id);
+    const response = await Booking.findById(req.params.id);
 
     if (response) {
       res.status(200).send({ success: true, data: response });
@@ -34,25 +34,34 @@ const CreateABooking = async (req, res) => {
       name,
       email,
       message,
-      typeOfPhotosession,
+      photoTypeId,
       date,
-      status,
+      startTime,
+      endTime
     } = req.body;
-    const existingUser = await Calendar.findOne({ email });
-    if (existingUser.date === date) {
+    console.log(name,
+      email,
+      message,
+      photoTypeId,
+      date,
+      startTime,
+      endTime)
+    const existingUser = await Booking.findOne({ email:email, date:date });
+    if (existingUser) {
       return res.json({
         message: "User already booked a photoshoot for this date",
       });
     }
-    const reservation = new Calendar({
+    const reservation = await Booking.create({
       name,
       email,
       message,
-      typeOfPhotosession,
+      photoTypeId,
       date,
-      status,
-      createdAt: new Date(),
+      startTime,
+      endTime
     });
+    reservation.save();
     
     res
       .status(201)
@@ -69,12 +78,17 @@ const CreateABooking = async (req, res) => {
 const AcceptTheBookingById = async (req, res) => {
   try {
     const id = req.params.id;
-    const existingReservation = await Calendar.findOne({ _id: id });
+    const existingReservation = await Booking.findById(id);
     if (existingReservation) {
-      const reservation = await Calendar.updateOne(
+      const reservation = await Booking.findOneAndUpdate(
         { _id: id },
-        { $set: { status: "accepted" } },
-        { upsert: true }
+        {
+          status: "accepted",
+        },
+        {
+          upsert: true,
+          new: true,
+        }
       );
       res
         .status(201)
@@ -95,12 +109,17 @@ const AcceptTheBookingById = async (req, res) => {
 const DeclineTheBookingById = async (req, res) => {
   try {
     const id = req.params.id;
-    const existingReservation = await Calendar.findOne({ _id: id });
+    const existingReservation = await Booking.findById(id);
     if (existingReservation) {
-      const reservation = await Calendar.updateOne(
+      const reservation = await Booking.updateOne(
         { _id: id },
-        { $set: { status: "declined" } },
-        { upsert: true }
+        {
+          status: "declined",
+        },
+        {
+          upsert: true,
+          new: true,
+        }
       );
       res
         .status(201)
@@ -120,7 +139,7 @@ const DeclineTheBookingById = async (req, res) => {
 
 const DeleteTheDeclinedBookingById = async (req, res) => {
   try {
-    const deletedRes = await Calendar.deleteOne({
+    const deletedRes = await Booking.deleteOne({
       _id: req.params.id,
     });
     if (deletedRes.deletedCount === 1) {

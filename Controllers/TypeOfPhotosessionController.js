@@ -48,7 +48,7 @@ const GetTypeOfPhotographyByTypeName = async (req, res) => {
 
 const CreateTypeOfPhotography = async (req, res) => {
   try {
-    const { typeOfPhotography, mainPhoto, text } = req.body;
+    const { typeOfPhotography, shootingDuration, mainPhoto, text } = req.body;
 
     const existingType = await TypesOfPhotoshoot.findOne({ typeOfPhotography });
 
@@ -58,6 +58,7 @@ const CreateTypeOfPhotography = async (req, res) => {
 
     const typeOfPhotoshoot = new TypesOfPhotoshoot({
       typeOfPhotography,
+      shootingDuration,
       mainPhoto,
       text,
     });
@@ -76,11 +77,12 @@ const CreateTypeOfPhotography = async (req, res) => {
 
 const UpdateTypeOfPhotographyById = async (req, res) => {
   try {
-    const { typeOfPhotography, mainPhoto, text } = req.body;
+    const { typeOfPhotography, shootingDuration, mainPhoto, text } = req.body;
     const result = await TypesOfPhotoshoot.findOneAndUpdate(
       { _id: req.params.id },
       {
         typeOfPhotography : typeOfPhotography, 
+        shootingDuration : shootingDuration,
         mainPhoto : mainPhoto, 
         text : text
       },

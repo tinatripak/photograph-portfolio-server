@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const calendarSchema = new mongoose.Schema({
+const bookingSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "The name is required"],
@@ -13,13 +13,20 @@ const calendarSchema = new mongoose.Schema({
     type: String,
     required: [true, "The message is required"],
   },
-  typeOfPhotography: {
+  photoTypeId: {
     type: String,
     required: [true, "The type of photography is required"],
   },
   date: {
     type: String,
     required: [true, "The date is required"],
+  },
+  startTime: {
+    type: String,
+    required: [true, "The time is required"],
+  },
+  endTime: {
+    type: String,
   },
   status: {
     type: String,
@@ -32,4 +39,4 @@ const calendarSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("calendars", calendarSchema);
+module.exports = mongoose.model("bookings", bookingSchema);
