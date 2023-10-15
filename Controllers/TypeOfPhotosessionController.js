@@ -10,7 +10,7 @@ const GetTypesOfPhotography = async (req, res) => {
       res.status(200).send({ success: true, msg: "No photo session types found" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -26,7 +26,7 @@ const GetTypeOfPhotographyById = async (req, res) => {
       res.status(200).send({ success: true, msg: "No photo session found by ID" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -42,7 +42,7 @@ const GetTypeOfPhotographyByTypeName = async (req, res) => {
       res.status(200).send({ success: true, msg: "No photo session found by name" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -53,7 +53,7 @@ const CreateTypeOfPhotography = async (req, res) => {
     const existingType = await TypesOfPhotoshoot.findOne({ typeOfPhotography });
 
     if (existingType) {
-      return res.status(400).json({ message: "Type already exists", success: false });
+      return res.status(404).json({ message: "Type already exists", success: false });
     }
 
     const typeOfPhotoshoot = new TypesOfPhotoshoot({
@@ -71,7 +71,7 @@ const CreateTypeOfPhotography = async (req, res) => {
       data: typeOfPhotoshoot,
     });
   } catch (error) {
-    return res.status(500).send({ success: false, msg: error });
+    return res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -97,7 +97,7 @@ const UpdateTypeOfPhotographyById = async (req, res) => {
       data: result,
     });
   } catch (error) {
-    res.status(400).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -110,7 +110,7 @@ const DeleteTypeOfPhotographyById = async (req, res) => {
       res.status(200).send({ success: false, msg: "No type of photo session found" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 module.exports = { 

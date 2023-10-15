@@ -10,7 +10,7 @@ const GetPhotoshoots = async (req, res) => {
       res.status(200).send({ success: true, msg: "No photo sessions found" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -26,7 +26,7 @@ const GetPhotoshootById = async (req, res) => {
         .send({ success: true, msg: "No photo session found by ID" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -42,7 +42,7 @@ const GetPhotoshootByName = async (req, res) => {
         .send({ success: true, msg: "No photo session found by ID" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -62,7 +62,7 @@ const CreatePhotoshoot = async (req, res) => {
       data: photoshoot,
     });
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -90,7 +90,7 @@ const UpdatePhotoshootById = async (req, res) => {
         data: result,
       });
   } catch (error) {
-    res.status(400).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -105,7 +105,7 @@ const DeletePhotoshootById = async (req, res) => {
       res.status(200).send({ success: false, msg: "No photo session found" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 module.exports = {

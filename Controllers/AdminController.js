@@ -11,7 +11,7 @@ const GetAllAdmins = async (req, res) => {
       res.status(200).send({ success: true, msg: "No admins found" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -28,7 +28,7 @@ const GetAdminById = async (req, res) => {
         .send({ success: true, msg: "No administrator found by ID" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -65,7 +65,7 @@ const CreateAnAdmin = async (req, res, next) => {
       });
     next();
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -93,7 +93,7 @@ const UpdateTheAdminById = async (req, res) => {
         data: result,
       });
   } catch (error) {
-    res.status(400).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -108,7 +108,7 @@ const DeleteTheAdminById = async (req, res) => {
       res.status(200).send({ success: false, msg: "No administrator found" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 

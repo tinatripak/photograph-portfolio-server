@@ -10,7 +10,7 @@ const getPhotographerBio = async (req, res) => {
       res.status(200).send({ success: true, msg: "No bio found" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -25,7 +25,7 @@ const getPhotographerBioById = async (req, res) => {
       res.status(200).send({ success: true, msg: "No bio found by ID" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -46,7 +46,7 @@ const createPhotographerBio = async (req, res) => {
       data: photographer,
     });
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -71,7 +71,7 @@ const updatePhotographerBioById = async (req, res) => {
       data: result,
     });
   } catch (error) {
-    res.status(400).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 

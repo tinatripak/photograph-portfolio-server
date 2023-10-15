@@ -10,7 +10,7 @@ const GetAllBookings = async (req, res) => {
       res.status(200).send({ success: true, msg: "No bookings found" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -24,7 +24,7 @@ const GetTheBookingById = async (req, res) => {
       res.status(200).send({ success: true, msg: "No booking found by ID" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -71,7 +71,7 @@ const CreateABooking = async (req, res) => {
         data: reservation,
       });
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -102,7 +102,7 @@ const AcceptTheBookingById = async (req, res) => {
       console.error("Booking doesnt exist");
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -133,7 +133,7 @@ const DeclineTheBookingById = async (req, res) => {
       console.error("Booking doesnt exist");
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -148,7 +148,7 @@ const DeleteTheDeclinedBookingById = async (req, res) => {
       res.status(200).send({ success: false, msg: "No booking found" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 

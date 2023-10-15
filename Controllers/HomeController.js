@@ -10,7 +10,7 @@ const GetAllHomePhotos = async (req, res) => {
       res.status(200).send({ success: true, msg: "No photos found for homepage" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -25,7 +25,7 @@ const GetHomePhotoById = async (req, res) => {
       res.status(200).send({ success: true, msg: "No homepage photo found for id" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -46,7 +46,7 @@ const CreateHomePhoto = async (req, res) => {
       data: home,
     });
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -67,7 +67,7 @@ const UpdateHomePhotoById = async (req, res) => {
     success: true,
     data: result, });
   } catch (error) {
-    res.status(400).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 module.exports = {

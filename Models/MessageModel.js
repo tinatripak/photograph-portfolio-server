@@ -14,8 +14,7 @@ const messageSchema = new mongoose.Schema({
     required: [true, "The question is required"],
   },
   createdAt: {
-    type: Date,
-    default: Date.now,
+    type: Date
   },
 });
 

@@ -10,7 +10,7 @@ const GetAllMessages = async (req, res) => {
       res.status(200).send({ success: true, msg: "No messages found" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -24,7 +24,7 @@ const GetTheMessageById = async (req, res) => {
       res.status(200).send({ success: true, msg: "No message found by ID" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -43,7 +43,7 @@ const CreateAMessage = async (req, res) => {
       data: message,
     });
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
@@ -60,7 +60,7 @@ const DeleteTheMessage = async (req, res) => {
       res.status(200).send({ success: false, msg: "No message found" });
     }
   } catch (error) {
-    res.status(500).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error });
   }
 };
 
