@@ -23,4 +23,4 @@ const photoshootSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("photoshoots", photoshootSchema);
+module.exports = mongoose.model("photoshoot", photoshootSchema);

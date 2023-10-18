@@ -1,44 +1,44 @@
-const Message = require("../Models/MessageModel");
+const Question = require("../Models/QuestionModel");
 
-const GetAllMessages = async (req, res) => {
+const GetAllQuestions = async (req, res) => {
   try {
-    const response = await Message.find({});
+    const response = await Question.find({});
 
     if (response) {
       res.status(200).send({ success: true, data: response });
     } else {
-      res.status(200).send({ success: true, msg: "No messages found" });
+      res.status(200).send({ success: true, msg: "No questions found" });
     }
   } catch (error) {
     res.status(404).send({ success: false, msg: error });
   }
 };
 
-const GetTheMessageById = async (req, res) => {
+const GetQuestionById = async (req, res) => {
   try {
-    const response = await Message.findById(req.params.id);
+    const response = await Question.findById(req.params.id);
 
     if (response) {
       res.status(200).send({ success: true, data: response });
     } else {
-      res.status(200).send({ success: true, msg: "No message found by ID" });
+      res.status(200).send({ success: true, msg: "No question found by ID" });
     }
   } catch (error) {
     res.status(404).send({ success: false, msg: error });
   }
 };
 
-const CreateAMessage = async (req, res) => {
+const CreateQuestion = async (req, res) => {
   try {
     const { name, email, question } = req.body;
-    const message = await Message.create({
+    const message = await Question.create({
       name,
       email,
       question,
       createdAt: new Date(),
     });
     res.status(201).json({
-      message: "The message successfully created",
+      message: "The question successfully created",
       success: true,
       data: message,
     });
@@ -47,17 +47,17 @@ const CreateAMessage = async (req, res) => {
   }
 };
 
-const DeleteTheMessage = async (req, res) => {
+const DeleteQuestion = async (req, res) => {
   try {
-    const deletedRes = await Message.deleteOne({
+    const deletedRes = await Question.deleteOne({
       _id: req.params.id,
     });
     if (deletedRes.deletedCount === 1) {
       res
         .status(200)
-        .send({ success: true, msg: "The message has been removed" });
+        .send({ success: true, msg: "The question has been removed" });
     } else {
-      res.status(200).send({ success: false, msg: "No message found" });
+      res.status(200).send({ success: false, msg: "No question found" });
     }
   } catch (error) {
     res.status(404).send({ success: false, msg: error });
@@ -65,8 +65,8 @@ const DeleteTheMessage = async (req, res) => {
 };
 
 module.exports = {
-  GetAllMessages,
-  GetTheMessageById,
-  CreateAMessage,
-  DeleteTheMessage,
+  GetAllQuestions,
+  GetQuestionById,
+  CreateQuestion,
+  DeleteQuestion,
 };

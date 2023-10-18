@@ -20,4 +20,4 @@ const photographerSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("photographers", photographerSchema);
+module.exports = mongoose.model("photographer", photographerSchema);

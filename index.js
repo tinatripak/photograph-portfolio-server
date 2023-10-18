@@ -7,12 +7,12 @@ require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const authRoute = require("./Routes/AuthRoute");
 const adminRoute = require("./Routes/AdminRoute");
-const messageRoute = require("./Routes/MessageRoute");
+const questionRoute = require("./Routes/QuestionRoute");
 const bookingRoute = require("./Routes/BookingRoute");
 const homeRoute = require("./Routes/HomeRoute");
 const photographerRoute = require("./Routes/PhotographerRoute");
-const portfolioRoute = require("./Routes/PortfolioRoute");
-const typesOfPhotoshootRoute = require("./Routes/TypesOfPhotoshootRoute");
+const photoshootRoute = require("./Routes/PhotoshootRoute");
+const typeOfPhotoshootRoute = require("./Routes/TypeOfPhotoshootRoute");
 
 const { MONGO_URL, PORT } = process.env;
 
@@ -44,8 +44,7 @@ app.use("/", authRoute);
 app.use("/home", homeRoute);
 app.use("/admin", adminRoute);
 app.use("/booking", bookingRoute);
-app.use("/message", messageRoute);
-app.use("/portfolio", portfolioRoute);
+app.use("/question", questionRoute);
+app.use("/photoshoot", photoshootRoute);
 app.use("/photographer", photographerRoute);
-app.use("/typesOfPhotography", typesOfPhotoshootRoute);
-
+app.use("/typeOfPhotography", typeOfPhotoshootRoute);

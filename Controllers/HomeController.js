@@ -65,7 +65,7 @@ const UpdateHomePhotoById = async (req, res) => {
     );
     res.status(200).send({ message: "Homepage photo successfully updated",
     success: true,
-    data: result, });
+    data: result });
   } catch (error) {
     res.status(404).send({ success: false, msg: error });
   }

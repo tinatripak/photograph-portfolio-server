@@ -33,10 +33,17 @@ const bookingSchema = new mongoose.Schema({
     default: "not defined",
     required: [true, "The status is required"],
   },
+  isValid: {
+    type: Boolean
+  },
+  uniqueString: {
+    type: String,
+    required: [true, "The unique string is required"],
+  },
   createdAt: {
     type: Date,
     default: Date.now,
   },
 });
 
-module.exports = mongoose.model("bookings", bookingSchema);
+module.exports = mongoose.model("booking", bookingSchema);

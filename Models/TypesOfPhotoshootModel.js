@@ -24,4 +24,4 @@ const typeOfPhotoshootSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("typeofphotoshoots", typeOfPhotoshootSchema);
+module.exports = mongoose.model("typeofphotoshoot", typeOfPhotoshootSchema);

@@ -32,7 +32,7 @@ const GetAdminById = async (req, res) => {
   }
 };
 
-const CreateAnAdmin = async (req, res, next) => {
+const CreateAdmin = async (req, res, next) => {
   try {
     const { email, password, username, photo } = req.body;
     const existingUser = await User.findOne({ email });
@@ -69,7 +69,7 @@ const CreateAnAdmin = async (req, res, next) => {
   }
 };
 
-const UpdateTheAdminById = async (req, res) => {
+const UpdateAdminById = async (req, res) => {
   try {
     const { email, password, username, photo } = req.body;
     const result = await User.findOneAndUpdate(
@@ -97,7 +97,7 @@ const UpdateTheAdminById = async (req, res) => {
   }
 };
 
-const DeleteTheAdminById = async (req, res) => {
+const DeleteAdminById = async (req, res) => {
   try {
     const deletedRes = await User.findByIdAndDelete(req.params.id);
     if (deletedRes.deletedCount === 1) {
@@ -115,7 +115,7 @@ const DeleteTheAdminById = async (req, res) => {
 module.exports = {
   GetAllAdmins,
   GetAdminById,
-  CreateAnAdmin,
-  UpdateTheAdminById,
-  DeleteTheAdminById,
+  CreateAdmin,
+  UpdateAdminById,
+  DeleteAdminById,
 };

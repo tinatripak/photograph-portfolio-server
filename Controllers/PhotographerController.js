@@ -1,6 +1,6 @@
 const Photographer = require("../Models/PhotographerModel");
 
-const getPhotographerBio = async (req, res) => {
+const GetPhotographers = async (req, res) => {
   try {
     const response = await Photographer.find({});
 
@@ -14,7 +14,7 @@ const getPhotographerBio = async (req, res) => {
   }
 };
 
-const getPhotographerBioById = async (req, res) => {
+const GetPhotographerById = async (req, res) => {
   try {
     const { id } = req.params;
     const response = await Photographer.findById(id);
@@ -29,7 +29,7 @@ const getPhotographerBioById = async (req, res) => {
   }
 };
 
-const createPhotographerBio = async (req, res) => {
+const CreatePhotographer = async (req, res) => {
   try {
     const { bio, phoneNumber, photo } = req.body;
     const photographer = new Photographer({
@@ -50,7 +50,7 @@ const createPhotographerBio = async (req, res) => {
   }
 };
 
-const updatePhotographerBioById = async (req, res) => {
+const UpdatePhotographerById = async (req, res) => {
   try {
     const { bio, phoneNumber, photo } = req.body;
     const result = await Photographer.findOneAndUpdate(
@@ -76,8 +76,8 @@ const updatePhotographerBioById = async (req, res) => {
 };
 
 module.exports = {
-  getPhotographerBio,
-  getPhotographerBioById,
-  createPhotographerBio,
-  updatePhotographerBioById,
+  GetPhotographers,
+  GetPhotographerById,
+  CreatePhotographer,
+  UpdatePhotographerById,
 };

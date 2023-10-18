@@ -1,15 +1,15 @@
 const {
-  getPhotographerBio,
-  getPhotographerBioById, 
-  createPhotographerBio,
-  updatePhotographerBioById
+  GetPhotographers,
+  GetPhotographerById,
+  CreatePhotographer,
+  UpdatePhotographerById
 } = require("../Controllers/PhotographerController");
 
 const router = require("express").Router();
 
-router.get("/getPhotographerBio", getPhotographerBio);
-router.get("/getPhotographerBioById/:id", getPhotographerBioById);
-router.post("/createPhotographerBio", createPhotographerBio);
-router.put("/updatePhotographerBioById/:id", updatePhotographerBioById);
+router.get("/getPhotographers", GetPhotographers);
+router.get("/getPhotographerById/:id", GetPhotographerById);
+router.post("/createPhotographer", CreatePhotographer);
+router.put("/updatePhotographerById/:id", UpdatePhotographerById);
 
 module.exports = router;

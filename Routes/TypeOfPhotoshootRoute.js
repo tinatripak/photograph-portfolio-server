@@ -1,10 +1,10 @@
 const {
   GetTypesOfPhotography,
   GetTypeOfPhotographyById,
+  GetTypeOfPhotographyByTypeName,
   CreateTypeOfPhotography,
   UpdateTypeOfPhotographyById,
-  DeleteTypeOfPhotographyById,
-  GetTypeOfPhotographyByTypeName
+  DeleteTypeOfPhotographyById
 } = require("../Controllers/TypeOfPhotosessionController");
 
 const router = require("express").Router();

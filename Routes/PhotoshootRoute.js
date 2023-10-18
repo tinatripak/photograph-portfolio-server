@@ -1,11 +1,11 @@
 const {
   GetPhotoshootById,
   GetPhotoshoots,
+  GetPhotoshootByName,
   CreatePhotoshoot,
   UpdatePhotoshootById,
-  DeletePhotoshootById,
-  GetPhotoshootByName
-} = require("../Controllers/PortfolioController");
+  DeletePhotoshootById
+} = require("../Controllers/PhotoshootController");
 
 const router = require("express").Router();
 

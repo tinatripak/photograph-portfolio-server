@@ -1,8 +1,8 @@
 const {
-    CreateHomePhoto, 
-    GetAllHomePhotos, 
-    GetHomePhotoById,
-    UpdateHomePhotoById
+  CreateHomePhoto,
+  GetAllHomePhotos,
+  GetHomePhotoById,
+  UpdateHomePhotoById
   } = require("../Controllers/HomeController");
   
   const router = require("express").Router();

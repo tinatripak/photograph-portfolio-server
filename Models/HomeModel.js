@@ -14,4 +14,4 @@ const homeSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("homes", homeSchema);
+module.exports = mongoose.model("home", homeSchema);
