@@ -1,3 +1,4 @@
+const nodemailer = require('nodemailer');
 const Question = require("../Models/QuestionModel");
 
 const GetAllQuestions = async (req, res) => {
@@ -64,9 +65,56 @@ const DeleteQuestion = async (req, res) => {
   }
 };
 
+const AnswerToQuestion = async (req, res) => {
+  try {
+    const { id, email, question, answer } = req.body;
+    
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'tinarudenko2002@gmail.com',
+        pass: 'unxwarueqdzvrdes',
+      },
+    });
+  
+    send();
+  
+    async function send() {
+      const result = await transporter.sendMail({
+        from: 'tinarudenko2002@gmail.com',
+        to: email,
+        subject: `Answer to the question '${question}'`,
+        text: `${answer}`,
+      });
+  
+      console.log(JSON.stringify(result, null, 4));
+    }
+
+    const result = await Question.findOneAndUpdate(
+      { _id: id },
+      {
+        answer: answer,
+      },
+      {
+        upsert: true,
+        new: true,
+      }
+    );
+
+    res.status(201).json({
+      message: "The question successfully answered",
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    res.status(404).send({ success: false, msg: error });
+  }
+};
+
 module.exports = {
   GetAllQuestions,
   GetQuestionById,
   CreateQuestion,
   DeleteQuestion,
+  AnswerToQuestion
 };

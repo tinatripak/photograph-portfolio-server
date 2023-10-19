@@ -13,6 +13,9 @@ const questionSchema = new mongoose.Schema({
     type: String,
     required: [true, "The question is required"],
   },
+  answer: {
+    type: String,
+  },
   createdAt: {
     type: Date
   },
