@@ -19,13 +19,17 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Your photo is required"],
   },
+  role: {
+    type: String,
+    default: "admin",
+  },
   createdAt: {
     type: Date,
   },
 });
 
 userSchema.pre("save", async function () {
-  this.password = bcrypt.hash(this.password, 12);
+  this.password = await bcrypt.hash(this.password, 12);
 });
 
 module.exports = mongoose.model("user", userSchema);

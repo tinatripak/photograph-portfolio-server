@@ -32,6 +32,8 @@ const GetAdminById = async (req, res) => {
   }
 };
 
+
+
 const CreateAdmin = async (req, res, next) => {
   try {
     const { email, password, username, photo } = req.body;

@@ -16,6 +16,13 @@ const Login = async (req, res, next) => {
     if (!auth) {
       return res.json({ message: "Incorrect password or email" });
     }
+
+    for (const cookieName in req.cookies) {
+      if (req.cookies[cookieName] === undefined) {
+        res.clearCookie(cookieName);
+      }
+    }
+    
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
       withCredentials: true,
@@ -31,4 +38,22 @@ const Login = async (req, res, next) => {
   }
 };
 
-module.exports = { Login };
+const Logout = async (req, res) => {
+  try {
+    const [removeCookie] = useCookies([]);
+    Object.keys(req.cookies).forEach(cookieName => {
+      console.log(cookieName)
+      if (cookieName === "token") {
+        removeCookie(cookieName);
+      }
+    });
+    
+    res
+      .status(201)
+      .json({ message: "User logouted in successfully", success: true});
+  } catch (error) {
+  }
+};
+
+
+module.exports = { Login, Logout };
