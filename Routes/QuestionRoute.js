@@ -3,16 +3,15 @@ const {
   GetQuestionById,
   CreateQuestion,
   DeleteQuestion,
-  AnswerToQuestion
-  } = require("../Controllers/QuestionController");
-  
-  const router = require("express").Router();
-  
-  router.get("/getAllQuestions", GetAllQuestions);
-  router.get("/getQuestionById/:id", GetQuestionById);
-  router.post("/createQuestion", CreateQuestion);
-  router.delete("/deleteQuestionById/:id", DeleteQuestion);
-  router.post("/answerToQuestion", AnswerToQuestion);
-  
-  module.exports = router;
-  
+  AnswerToQuestion,
+} = require("../Controllers/QuestionController");
+const { authenticateUser } = require("../Middlewares/AuthMiddleware");
+const router = require("express").Router();
+
+router.get("/getAllQuestions", authenticateUser, GetAllQuestions);
+router.get("/getQuestionById/:id", authenticateUser, GetQuestionById);
+router.post("/createQuestion", CreateQuestion);
+router.delete("/deleteQuestionById/:id", authenticateUser, DeleteQuestion);
+router.post("/answerToQuestion", authenticateUser, AnswerToQuestion);
+
+module.exports = router;

@@ -36,7 +36,7 @@ app.use(express.json());
 
 app.use("/", authRoute);
 app.use("/home", homeRoute);
-app.use("/admin", adminRoute);
+app.use("/admin", adminRoute); 
 app.use("/booking", bookingRoute);
 app.use("/question", questionRoute);
 app.use("/photoshoot", photoshootRoute);
