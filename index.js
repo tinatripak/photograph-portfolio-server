@@ -30,6 +30,11 @@ app.listen(PORT, () => {
 
 app.use(cors());
 
+app.use(cors({ 
+  origin: 'https://photograph-portfolio-client.vercel.app/',
+  credentials: true 
+}));
+
 app.use(cookieParser());
 
 app.use(express.json());
