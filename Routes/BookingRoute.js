@@ -10,8 +10,8 @@ const {
 const { authenticateUser } = require("../Middlewares/AuthMiddleware");
 const router = require("express").Router();
 
-router.get("/getAllBookings", authenticateUser, GetAllBookings);
-router.get("/getBookingById/:id", authenticateUser, GetBookingById);
+router.get("/getAllBookings", GetAllBookings);
+router.get("/getBookingById/:id", GetBookingById);
 router.post("/createBooking", CreateBooking);
 router.put("/acceptBookingById/:id", authenticateUser, AcceptBookingById);
 router.put("/declineBookingById/:id", authenticateUser, DeclineBookingById);
