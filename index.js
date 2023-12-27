@@ -28,7 +28,7 @@ app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
 
-app.use(cors());
+// app.use(cors());
 
 app.use(cors({ 
   origin: 'https://photograph-portfolio-client.vercel.app/',
