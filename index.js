@@ -29,7 +29,7 @@ app.listen(PORT, () => {
 });
 
 app.use(cors({
-  origin: "http://localhost:3000", 
+  origin: "https://photograph-portfolio-client.vercel.app/", 
   methods: "GET, POST, PUT, DELETE, OPTIONS", 
   allowedHeaders: "Content-Type, Authorization",
   credentials: true,
