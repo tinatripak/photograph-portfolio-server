@@ -80,14 +80,12 @@ const AnswerToQuestion = async (req, res) => {
     send();
 
     async function send() {
-      const result = await transporter.sendMail({
+      await transporter.sendMail({
         from: "tinarudenko2002@gmail.com",
         to: email,
         subject: `Answer to the question '${question}'`,
         text: `${answer}`,
       });
-
-      console.log(JSON.stringify(result, null, 4));
     }
 
     const result = await Question.findOneAndUpdate(

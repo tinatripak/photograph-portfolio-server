@@ -8,7 +8,6 @@ const randString = () => {
     const ch = Math.floor(Math.random() * 10 + 1);
     randStr += ch;
   }
-  console.log(randStr);
   return randStr;
 };
 
@@ -24,14 +23,12 @@ const sendEmailConfirmation = (email, uniqueString) => {
   send();
 
   async function send() {
-    const result = await transporter.sendMail({
+    await transporter.sendMail({
       from: "tinarudenko2002@gmail.com",
       to: email,
       subject: "Booking confirmation",
       text: `Press http://localhost:3000/verifyBooking/${uniqueString} to verify your booking by email. Thanks`,
     });
-
-    console.log(JSON.stringify(result, null, 4));
   }
 };
 
@@ -47,7 +44,7 @@ const sendEmailWithConfirmedBooking = (email, booking) => {
   send();
 
   async function send() {
-    const result = await transporter.sendMail({
+    await transporter.sendMail({
       from: "tinarudenko2002@gmail.com",
       to: email,
       subject: "Confirmed booking",
@@ -58,8 +55,6 @@ const sendEmailWithConfirmedBooking = (email, booking) => {
         Time: ${booking?.startTime}
       `,
     });
-
-    console.log(JSON.stringify(result, null, 4));
   }
 };
 
@@ -203,7 +198,6 @@ const DeleteDeclinedBookingById = async (req, res) => {
 
 const VerifyBooking = async (req, res) => {
   const { uniqueString } = req.params;
-  console.log(uniqueString);
   const booking = await Booking.findOne({ uniqueString: uniqueString });
   if (booking) {
     const result = await Booking.findOneAndUpdate(

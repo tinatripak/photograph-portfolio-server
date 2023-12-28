@@ -5,14 +5,13 @@ const {
   UpdateAdminById,
   DeleteAdminById,
 } = require("../Controllers/AdminController");
-const { userVerification } = require("../Middlewares/AuthMiddleware");
+const { checkToken } = require("../Middlewares/AuthMiddleware");
 const router = require("express").Router();
 
 router.get("/getAllAdmins", GetAllAdmins);
 router.get("/getAdminById/:id", GetAdminById);
-router.use(userVerification);
-router.post("/createAdmin", CreateAdmin);
-router.put("/updateAdminById/:id", UpdateAdminById);
-router.delete("/deleteAdminById/:id", DeleteAdminById);
+router.post("/createAdmin", checkToken, CreateAdmin);
+router.put("/updateAdminById/:id", checkToken, UpdateAdminById);
+router.delete("/deleteAdminById/:id", checkToken, DeleteAdminById);
 
 module.exports = router;

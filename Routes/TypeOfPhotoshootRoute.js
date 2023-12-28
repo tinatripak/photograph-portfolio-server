@@ -6,7 +6,7 @@ const {
   UpdateTypeOfPhotographyById,
   DeleteTypeOfPhotographyById,
 } = require("../Controllers/TypeOfPhotosessionController");
-const { userVerification } = require("../Middlewares/AuthMiddleware");
+const { checkToken } = require("../Middlewares/AuthMiddleware");
 const router = require("express").Router();
 
 router.get("/getAllTypesOfPhotography", GetTypesOfPhotography);
@@ -17,17 +17,17 @@ router.get(
 );
 router.post(
   "/createTypeOfPhotography",
-  userVerification,
+  checkToken,
   CreateTypeOfPhotography,
 );
 router.put(
   "/updateTypeOfPhotographyById/:id",
-  userVerification,
+  checkToken,
   UpdateTypeOfPhotographyById,
 );
 router.delete(
   "/deleteTypeOfPhotographyById/:id",
-  userVerification,
+  checkToken,
   DeleteTypeOfPhotographyById,
 );
 

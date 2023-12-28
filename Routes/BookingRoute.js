@@ -7,16 +7,15 @@ const {
   DeleteDeclinedBookingById,
   VerifyBooking,
 } = require("../Controllers/BookingController");
-const { userVerification } = require("../Middlewares/AuthMiddleware");
+const { checkToken } = require("../Middlewares/AuthMiddleware");
 const router = require("express").Router();
 
 router.get("/getAllBookings", GetAllBookings);
 router.get("/getBookingById/:id", GetBookingById);
 router.post("/createBooking", CreateBooking);
 router.put("/verifyBooking/:uniqueString", VerifyBooking);
-router.use(userVerification);
-router.put("/acceptBookingById/:id", AcceptBookingById);
-router.put("/declineBookingById/:id", DeclineBookingById);
-router.delete("/deleteDeclinedBookingById/:id", DeleteDeclinedBookingById);
+router.put("/acceptBookingById/:id", checkToken, AcceptBookingById);
+router.put("/declineBookingById/:id", checkToken, DeclineBookingById);
+router.delete("/deleteDeclinedBookingById/:id", checkToken, DeleteDeclinedBookingById);
 
 module.exports = router;

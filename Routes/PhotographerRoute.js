@@ -4,15 +4,15 @@ const {
   CreatePhotographer,
   UpdatePhotographerById,
 } = require("../Controllers/PhotographerController");
-const { userVerification } = require("../Middlewares/AuthMiddleware");
+const { checkToken } = require("../Middlewares/AuthMiddleware");
 const router = require("express").Router();
 
 router.get("/getPhotographers", GetPhotographers);
 router.get("/getPhotographerById/:id", GetPhotographerById);
-router.post("/createPhotographer", userVerification, CreatePhotographer);
+router.post("/createPhotographer", checkToken, CreatePhotographer);
 router.put(
   "/updatePhotographerById/:id",
-  userVerification,
+  checkToken,
   UpdatePhotographerById,
 );
 

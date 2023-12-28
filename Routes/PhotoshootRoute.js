@@ -6,17 +6,17 @@ const {
   UpdatePhotoshootById,
   DeletePhotoshootById,
 } = require("../Controllers/PhotoshootController");
-const { userVerification } = require("../Middlewares/AuthMiddleware");
+const { checkToken } = require("../Middlewares/AuthMiddleware");
 const router = require("express").Router();
 
 router.get("/getPhotoshoots", GetPhotoshoots);
 router.get("/getPhotoshootById/:id", GetPhotoshootById);
 router.get("/getPhotoshootByName/:name", GetPhotoshootByName);
-router.post("/createPhotoshoot", userVerification, CreatePhotoshoot);
-router.put("/updatePhotoshootById/:id", userVerification, UpdatePhotoshootById);
+router.post("/createPhotoshoot", checkToken, CreatePhotoshoot);
+router.put("/updatePhotoshootById/:id", checkToken, UpdatePhotoshootById);
 router.delete(
   "/deletePhotoshootById/:id",
-  userVerification,
+  checkToken,
   DeletePhotoshootById,
 );
 
