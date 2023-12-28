@@ -3,14 +3,14 @@ const {
   GetAdminById,
   CreateAdmin,
   UpdateAdminById,
-  DeleteAdminById
+  DeleteAdminById,
 } = require("../Controllers/AdminController");
 const { userVerification } = require("../Middlewares/AuthMiddleware");
 const router = require("express").Router();
 
-router.use(userVerification);
 router.get("/getAllAdmins", GetAllAdmins);
 router.get("/getAdminById/:id", GetAdminById);
+router.use(userVerification);
 router.post("/createAdmin", CreateAdmin);
 router.put("/updateAdminById/:id", UpdateAdminById);
 router.delete("/deleteAdminById/:id", DeleteAdminById);

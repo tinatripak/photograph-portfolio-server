@@ -1,9 +1,9 @@
-const nodemailer = require('nodemailer');
-const Booking = require('../Models/BookingModel');
+const nodemailer = require("nodemailer");
+const Booking = require("../Models/BookingModel");
 
 const randString = () => {
   const len = 8;
-  let randStr = '';
+  let randStr = "";
   for (let i = 0; i < len; i++) {
     const ch = Math.floor(Math.random() * 10 + 1);
     randStr += ch;
@@ -14,10 +14,10 @@ const randString = () => {
 
 const sendEmailConfirmation = (email, uniqueString) => {
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: "gmail",
     auth: {
-      user: 'tinarudenko2002@gmail.com',
-      pass: 'unxwarueqdzvrdes',
+      user: "tinarudenko2002@gmail.com",
+      pass: "unxwarueqdzvrdes",
     },
   });
 
@@ -25,22 +25,22 @@ const sendEmailConfirmation = (email, uniqueString) => {
 
   async function send() {
     const result = await transporter.sendMail({
-      from: 'tinarudenko2002@gmail.com',
+      from: "tinarudenko2002@gmail.com",
       to: email,
-      subject: 'Booking confirmation',
+      subject: "Booking confirmation",
       text: `Press http://localhost:3000/verifyBooking/${uniqueString} to verify your booking by email. Thanks`,
     });
 
     console.log(JSON.stringify(result, null, 4));
   }
-}
-  
+};
+
 const sendEmailWithConfirmedBooking = (email, booking) => {
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: "gmail",
     auth: {
-      user: 'tinarudenko2002@gmail.com',
-      pass: 'unxwarueqdzvrdes',
+      user: "tinarudenko2002@gmail.com",
+      pass: "unxwarueqdzvrdes",
     },
   });
 
@@ -48,9 +48,9 @@ const sendEmailWithConfirmedBooking = (email, booking) => {
 
   async function send() {
     const result = await transporter.sendMail({
-      from: 'tinarudenko2002@gmail.com',
+      from: "tinarudenko2002@gmail.com",
       to: email,
-      subject: 'Confirmed booking',
+      subject: "Confirmed booking",
       text: `
         Model's name: ${booking?.name}
         Model's message: ${booking?.message}
@@ -70,7 +70,7 @@ const GetAllBookings = async (req, res) => {
     if (response) {
       res.status(200).send({ success: true, data: response });
     } else {
-      res.status(200).send({ success: true, msg: 'No bookings found' });
+      res.status(200).send({ success: true, msg: "No bookings found" });
     }
   } catch (error) {
     res.status(404).send({ success: false, msg: error });
@@ -84,7 +84,7 @@ const GetBookingById = async (req, res) => {
     if (response) {
       res.status(200).send({ success: true, data: response });
     } else {
-      res.status(200).send({ success: true, msg: 'No booking found by ID' });
+      res.status(200).send({ success: true, msg: "No booking found by ID" });
     }
   } catch (error) {
     res.status(404).send({ success: false, msg: error });
@@ -100,7 +100,7 @@ const CreateBooking = async (req, res) => {
     const existingUser = await Booking.findOne({ email: email, date: date });
     if (existingUser) {
       return res.json({
-        message: 'User already booked a photoshoot for this date',
+        message: "User already booked a photoshoot for this date",
       });
     }
     const reservation = await Booking.create({
@@ -119,7 +119,7 @@ const CreateBooking = async (req, res) => {
     sendEmailConfirmation(email, uniqueString);
 
     res.status(201).json({
-      message: 'User successfully booked a photoshoot',
+      message: "User successfully booked a photoshoot",
       success: true,
       data: reservation,
     });
@@ -136,20 +136,20 @@ const AcceptBookingById = async (req, res) => {
       const reservation = await Booking.findOneAndUpdate(
         { _id: id },
         {
-          status: 'accepted',
+          status: "accepted",
         },
         {
           upsert: true,
           new: true,
-        }
+        },
       );
       res.status(201).json({
-        message: 'Booking for the photo shoot is accepted',
+        message: "Booking for the photo shoot is accepted",
         success: true,
         data: reservation,
       });
     } else {
-      console.error('Booking doesnt exist');
+      console.error("Booking doesnt exist");
     }
   } catch (error) {
     res.status(404).send({ success: false, msg: error });
@@ -164,20 +164,20 @@ const DeclineBookingById = async (req, res) => {
       const reservation = await Booking.updateOne(
         { _id: id },
         {
-          status: 'declined',
+          status: "declined",
         },
         {
           upsert: true,
           new: true,
-        }
+        },
       );
       res.status(201).json({
-        message: 'Booking for the photo shoot is declined',
+        message: "Booking for the photo shoot is declined",
         success: true,
         data: reservation,
       });
     } else {
-      console.error('Booking doesnt exist');
+      console.error("Booking doesnt exist");
     }
   } catch (error) {
     res.status(404).send({ success: false, msg: error });
@@ -192,9 +192,9 @@ const DeleteDeclinedBookingById = async (req, res) => {
     if (deletedRes.deletedCount === 1) {
       res
         .status(200)
-        .send({ success: true, msg: 'The booking has been removed' });
+        .send({ success: true, msg: "The booking has been removed" });
     } else {
-      res.status(200).send({ success: false, msg: 'No booking found' });
+      res.status(200).send({ success: false, msg: "No booking found" });
     }
   } catch (error) {
     res.status(404).send({ success: false, msg: error });
@@ -203,10 +203,9 @@ const DeleteDeclinedBookingById = async (req, res) => {
 
 const VerifyBooking = async (req, res) => {
   const { uniqueString } = req.params;
-  console.log(uniqueString)
+  console.log(uniqueString);
   const booking = await Booking.findOne({ uniqueString: uniqueString });
   if (booking) {
-
     const result = await Booking.findOneAndUpdate(
       { uniqueString: uniqueString },
       {
@@ -215,15 +214,14 @@ const VerifyBooking = async (req, res) => {
       {
         upsert: true,
         new: true,
-      }
+      },
     );
-    sendEmailWithConfirmedBooking(booking.email, booking)
-    res.status(200).send({ message: "Verified booking",
-    success: true,
-    data: result, });
-
+    sendEmailWithConfirmedBooking(booking.email, booking);
+    res
+      .status(200)
+      .send({ message: "Verified booking", success: true, data: result });
   } else {
-    res.json('Booking not found');
+    res.json("Booking not found");
   }
 };
 
@@ -234,5 +232,5 @@ module.exports = {
   AcceptBookingById,
   DeclineBookingById,
   DeleteDeclinedBookingById,
-  VerifyBooking
+  VerifyBooking,
 };

@@ -5,7 +5,7 @@ const {
   AcceptBookingById,
   DeclineBookingById,
   DeleteDeclinedBookingById,
-  VerifyBooking
+  VerifyBooking,
 } = require("../Controllers/BookingController");
 const { userVerification } = require("../Middlewares/AuthMiddleware");
 const router = require("express").Router();
@@ -18,6 +18,5 @@ router.use(userVerification);
 router.put("/acceptBookingById/:id", AcceptBookingById);
 router.put("/declineBookingById/:id", DeclineBookingById);
 router.delete("/deleteDeclinedBookingById/:id", DeleteDeclinedBookingById);
-
 
 module.exports = router;

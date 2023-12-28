@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const Login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    console.log(email, password)
+    console.log(email, password);
     if (!email || !password) {
       return res.json({ message: "All fields are required" });
     }
@@ -23,7 +23,7 @@ const Login = async (req, res, next) => {
         res.clearCookie(cookieName);
       }
     }
-    
+
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
       withCredentials: true,
@@ -33,21 +33,24 @@ const Login = async (req, res, next) => {
     });
     res
       .status(201)
-      .json({ message: "User logged in successfully", success: true, data: user });
+      .json({
+        message: "User logged in successfully",
+        success: true,
+        data: user,
+      });
     next();
   } catch (error) {
     res.status(404).send({ success: false, msg: error });
-
   }
 };
 
 const Logout = async (req, res) => {
   try {
-    res.cookie('token', 'none', {
-    expires: new Date(0),
-    httpOnly: true,
-  })
-    
+    res.cookie("token", "none", {
+      expires: new Date(0),
+      httpOnly: true,
+    });
+
     res
       .status(201)
       .json({ message: "User logged out successfully", success: true });
@@ -55,6 +58,5 @@ const Logout = async (req, res) => {
     res.status(500).json({ success: false, msg: "Internal server error" });
   }
 };
-
 
 module.exports = { Login, Logout };

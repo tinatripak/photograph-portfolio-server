@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const userVerification = async (req, res) => {
   const token = req.cookies;
-  console.log(token)
+  console.log("Token:", token);
   if (!token) {
     return res.json({ status: false, message: "No token provided" });
   }
@@ -14,6 +14,7 @@ const userVerification = async (req, res) => {
       return res.json({ status: false, message: "Token verification failed" });
     } else {
       const user = await User.findById(data.id);
+      console.log("User:", user);
       if (user) {
         return res.json({ status: true, user: user.username });
       } else {

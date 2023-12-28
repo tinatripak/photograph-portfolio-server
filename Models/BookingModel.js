@@ -34,7 +34,7 @@ const bookingSchema = new mongoose.Schema({
     required: [true, "The status is required"],
   },
   isValid: {
-    type: Boolean
+    type: Boolean,
   },
   uniqueString: {
     type: String,

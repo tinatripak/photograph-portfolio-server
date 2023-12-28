@@ -32,8 +32,6 @@ const GetAdminById = async (req, res) => {
   }
 };
 
-
-
 const CreateAdmin = async (req, res, next) => {
   try {
     const { email, password, username, photo } = req.body;
@@ -58,13 +56,11 @@ const CreateAdmin = async (req, res, next) => {
       httpOnly: false,
     });
 
-    res
-      .status(201)
-      .json({
-        message: "Admin successfully created",
-        success: true,
-        data: user,
-      });
+    res.status(201).json({
+      message: "Admin successfully created",
+      success: true,
+      data: user,
+    });
     next();
   } catch (error) {
     res.status(404).send({ success: false, msg: error });
@@ -85,15 +81,13 @@ const UpdateAdminById = async (req, res) => {
       {
         upsert: true,
         new: true,
-      }
+      },
     );
-    res
-      .status(200)
-      .json({
-        message: "Admin successfully updated",
-        success: true,
-        data: result,
-      });
+    res.status(200).json({
+      message: "Admin successfully updated",
+      success: true,
+      data: result,
+    });
   } catch (error) {
     res.status(404).send({ success: false, msg: error });
   }

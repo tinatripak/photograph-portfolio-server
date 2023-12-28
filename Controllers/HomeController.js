@@ -7,7 +7,9 @@ const GetAllHomePhotos = async (req, res) => {
     if (response) {
       res.status(200).send({ success: true, data: response });
     } else {
-      res.status(200).send({ success: true, msg: "No photos found for homepage" });
+      res
+        .status(200)
+        .send({ success: true, msg: "No photos found for homepage" });
     }
   } catch (error) {
     res.status(404).send({ success: false, msg: error });
@@ -22,7 +24,9 @@ const GetHomePhotoById = async (req, res) => {
     if (response) {
       res.status(200).send({ success: true, data: response });
     } else {
-      res.status(200).send({ success: true, msg: "No homepage photo found for id" });
+      res
+        .status(200)
+        .send({ success: true, msg: "No homepage photo found for id" });
     }
   } catch (error) {
     res.status(404).send({ success: false, msg: error });
@@ -61,11 +65,15 @@ const UpdateHomePhotoById = async (req, res) => {
       {
         upsert: true,
         new: true,
-      }
+      },
     );
-    res.status(200).send({ message: "Homepage photo successfully updated",
-    success: true,
-    data: result });
+    res
+      .status(200)
+      .send({
+        message: "Homepage photo successfully updated",
+        success: true,
+        data: result,
+      });
   } catch (error) {
     res.status(404).send({ success: false, msg: error });
   }

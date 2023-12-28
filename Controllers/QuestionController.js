@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 const Question = require("../Models/QuestionModel");
 
 const GetAllQuestions = async (req, res) => {
@@ -68,25 +68,25 @@ const DeleteQuestion = async (req, res) => {
 const AnswerToQuestion = async (req, res) => {
   try {
     const { id, email, question, answer } = req.body;
-    
+
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: "gmail",
       auth: {
-        user: 'tinarudenko2002@gmail.com',
-        pass: 'unxwarueqdzvrdes',
+        user: "tinarudenko2002@gmail.com",
+        pass: "unxwarueqdzvrdes",
       },
     });
-  
+
     send();
-  
+
     async function send() {
       const result = await transporter.sendMail({
-        from: 'tinarudenko2002@gmail.com',
+        from: "tinarudenko2002@gmail.com",
         to: email,
         subject: `Answer to the question '${question}'`,
         text: `${answer}`,
       });
-  
+
       console.log(JSON.stringify(result, null, 4));
     }
 
@@ -98,7 +98,7 @@ const AnswerToQuestion = async (req, res) => {
       {
         upsert: true,
         new: true,
-      }
+      },
     );
 
     res.status(201).json({
@@ -116,5 +116,5 @@ module.exports = {
   GetQuestionById,
   CreateQuestion,
   DeleteQuestion,
-  AnswerToQuestion
+  AnswerToQuestion,
 };

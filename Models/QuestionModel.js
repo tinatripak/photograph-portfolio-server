@@ -17,7 +17,7 @@ const questionSchema = new mongoose.Schema({
     type: String,
   },
   createdAt: {
-    type: Date
+    type: Date,
   },
 });
 

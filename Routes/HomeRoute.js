@@ -11,6 +11,6 @@ router.get("/getAllHomePhotos", GetAllHomePhotos);
 router.get("/getHomePhotoById/:id", GetHomePhotoById);
 router.post("/createHomePhoto", CreateHomePhoto);
 router.use(userVerification);
-router.put("/updateHomePhotoById/:id",  UpdateHomePhotoById);
+router.put("/updateHomePhotoById/:id", UpdateHomePhotoById);
 
 module.exports = router;

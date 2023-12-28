@@ -63,7 +63,7 @@ const UpdatePhotographerById = async (req, res) => {
       {
         upsert: true,
         new: true,
-      }
+      },
     );
     res.json({
       message: "Bio successfully updated",
