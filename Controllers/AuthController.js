@@ -31,13 +31,11 @@ const Login = async (req, res, next) => {
       maxAge: 720000,
       secure: true,
     });
-    res
-      .status(201)
-      .json({
-        message: "User logged in successfully",
-        success: true,
-        data: user,
-      });
+    res.status(201).json({
+      message: "User logged in successfully",
+      success: true,
+      data: user,
+    });
     next();
   } catch (error) {
     res.status(404).send({ success: false, msg: error });

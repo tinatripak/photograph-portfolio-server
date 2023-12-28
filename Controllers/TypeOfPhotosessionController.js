@@ -115,12 +115,10 @@ const DeleteTypeOfPhotographyById = async (req, res) => {
   try {
     const deletedRes = await TypesOfPhotoshoot.findByIdAndDelete(req.params.id);
     if (deletedRes.deletedCount === 1) {
-      res
-        .status(200)
-        .send({
-          success: true,
-          msg: "The type of photo session has been removed",
-        });
+      res.status(200).send({
+        success: true,
+        msg: "The type of photo session has been removed",
+      });
     } else {
       res
         .status(200)
