@@ -5,13 +5,13 @@ const {
   DeleteQuestion,
   AnswerToQuestion,
 } = require("../Controllers/QuestionController");
-const { authenticateUser } = require("../Middlewares/AuthMiddleware");
+const { userVerification } = require("../Middlewares/AuthMiddleware");
 const router = require("express").Router();
 
-router.get("/getAllQuestions", authenticateUser, GetAllQuestions);
-router.get("/getQuestionById/:id", authenticateUser, GetQuestionById);
+router.get("/getAllQuestions", GetAllQuestions);
+router.get("/getQuestionById/:id", GetQuestionById);
 router.post("/createQuestion", CreateQuestion);
-router.delete("/deleteQuestionById/:id", authenticateUser, DeleteQuestion);
-router.post("/answerToQuestion", authenticateUser, AnswerToQuestion);
+router.delete("/deleteQuestionById/:id", userVerification, DeleteQuestion);
+router.post("/answerToQuestion", userVerification, AnswerToQuestion);
 
 module.exports = router;

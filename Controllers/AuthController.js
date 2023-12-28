@@ -28,6 +28,8 @@ const Login = async (req, res, next) => {
     res.cookie("token", token, {
       withCredentials: true,
       httpOnly: false,
+      maxAge: 720000,
+      secure: true,
     });
     res
       .status(201)
@@ -41,18 +43,16 @@ const Login = async (req, res, next) => {
 
 const Logout = async (req, res) => {
   try {
-    const [removeCookie] = useCookies([]);
-    Object.keys(req.cookies).forEach(cookieName => {
-      console.log(cookieName)
-      if (cookieName === "token") {
-        removeCookie(cookieName);
-      }
-    });
+    res.cookie('token', 'none', {
+    expires: new Date(0),
+    httpOnly: true,
+  })
     
     res
       .status(201)
-      .json({ message: "User logouted in successfully", success: true});
+      .json({ message: "User logged out successfully", success: true });
   } catch (error) {
+    res.status(500).json({ success: false, msg: "Internal server error" });
   }
 };
 

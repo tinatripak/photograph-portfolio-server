@@ -4,12 +4,13 @@ const {
   GetHomePhotoById,
   UpdateHomePhotoById,
 } = require("../Controllers/HomeController");
-const { authenticateUser } = require("../Middlewares/AuthMiddleware");
+const { userVerification } = require("../Middlewares/AuthMiddleware");
 const router = require("express").Router();
 
-router.post("/createHomePhoto", authenticateUser, CreateHomePhoto);
 router.get("/getAllHomePhotos", GetAllHomePhotos);
 router.get("/getHomePhotoById/:id", GetHomePhotoById);
-router.put("/updateHomePhotoById/:id",authenticateUser,  UpdateHomePhotoById);
+router.post("/createHomePhoto", CreateHomePhoto);
+router.use(userVerification);
+router.put("/updateHomePhotoById/:id",  UpdateHomePhotoById);
 
 module.exports = router;
