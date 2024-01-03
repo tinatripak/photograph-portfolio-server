@@ -11,7 +11,6 @@ const bookingSchema = new mongoose.Schema({
   },
   message: {
     type: String,
-    required: [true, "The message is required"],
   },
   photoTypeId: {
     type: String,
