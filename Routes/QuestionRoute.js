@@ -8,8 +8,8 @@ const {
 const { checkToken } = require("../Middlewares/AuthMiddleware");
 const router = require("express").Router();
 
-router.get("/getAllQuestions", checkToken, GetAllQuestions);
-router.get("/getQuestionById/:id", checkToken, GetQuestionById);
+router.get("/getAllQuestions", GetAllQuestions);
+router.get("/getQuestionById/:id", GetQuestionById);
 router.post("/createQuestion", CreateQuestion);
 router.delete("/deleteQuestionById/:id", checkToken, DeleteQuestion);
 router.post("/answerToQuestion", checkToken, AnswerToQuestion);

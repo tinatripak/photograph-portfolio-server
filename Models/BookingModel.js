@@ -29,7 +29,7 @@ const bookingSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: "not defined",
+    default: "accepted",
     required: [true, "The status is required"],
   },
   isValid: {

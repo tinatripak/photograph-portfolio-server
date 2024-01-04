@@ -179,20 +179,18 @@ const DeclineBookingById = async (req, res) => {
   }
 };
 
-const DeleteDeclinedBookingById = async (req, res) => {
+const DeleteBookingById = async (req, res) => {
   try {
     const deletedRes = await Booking.deleteOne({
       _id: req.params.id,
     });
     if (deletedRes.deletedCount === 1) {
-      res
-        .status(200)
-        .send({ success: true, msg: "The booking has been removed" });
+      res.status(200).send({ success: true, msg: "The booking has been removed" });
     } else {
       res.status(200).send({ success: false, msg: "No booking found" });
     }
   } catch (error) {
-    res.status(404).send({ success: false, msg: error });
+    res.status(404).send({ success: false, msg: error.message });
   }
 };
 
@@ -225,6 +223,6 @@ module.exports = {
   CreateBooking,
   AcceptBookingById,
   DeclineBookingById,
-  DeleteDeclinedBookingById,
+  DeleteBookingById,
   VerifyBooking,
 };
