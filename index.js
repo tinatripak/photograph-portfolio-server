@@ -29,7 +29,7 @@ app.listen(PORT, () => {
 });
 
 app.use(cors({
-  origin: "https://ksigallery.vercel.app", 
+  origin: "https://ksigallery.vercel.app",
   methods: "GET, POST, PUT, DELETE, OPTIONS", 
   allowedHeaders: "Content-Type, Authorization",
   credentials: true,
