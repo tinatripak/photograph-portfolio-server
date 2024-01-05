@@ -25,14 +25,19 @@ const Login = async (req, res, next) => {
 
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
-      withCredentials: true,
       httpOnly: true,
       maxAge: 7200000,
-      secure: true,
-      sameSite: "none",
-      // domain: process.env.NODE_ENV === 'development' ? '.localhost' : '.vercel.app',
-      path: "/",
+      domain: 'vercel.com',
+      path: '/',
     });
+    // withCredentials: true,
+    // httpOnly: true,
+    // maxAge: 7200000,
+    // secure: true,
+    // sameSite: "none",
+    // // domain: process.env.NODE_ENV === 'development' ? '.localhost' : '.vercel.app',
+    // path: "/",
+    console.log("this token",token)
     res.send({
       message: "User logged in successfully",
       success: true,
