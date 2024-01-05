@@ -29,6 +29,8 @@ const Login = async (req, res, next) => {
       httpOnly: false,
       maxAge: 7200000,
       secure: true,
+      sameSite: "none",
+      domain: "ksigallery.vercel.app",
     });
     res.status(201).json({
       message: "User logged in successfully",
@@ -46,6 +48,8 @@ const Logout = async (req, res) => {
     res.cookie("token", "none", {
       expires: new Date(0),
       httpOnly: true,
+      sameSite: "none",
+      domain: "ksigallery.vercel.app",
     });
 
     res
