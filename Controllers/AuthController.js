@@ -26,7 +26,7 @@ const Login = async (req, res, next) => {
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
       httpOnly: true,
-      maxAge: 7200000,
+      maxAge: 72000,
       sameSite: "None",
       secure: true,
       path: '/',
