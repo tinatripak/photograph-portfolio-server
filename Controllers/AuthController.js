@@ -30,7 +30,7 @@ const Login = async (req, res, next) => {
       maxAge: 7200000,
       secure: true,
       sameSite: "none",
-      domain: "ksigallery.vercel.app",
+      domain: process.env.NODE_ENV === 'development' ? '.localhost' : '.vercel.app',
     });
     res.send({
       message: "User logged in successfully",
@@ -50,7 +50,7 @@ const Logout = async (req, res) => {
       expires: new Date(0),
       httpOnly: true,
       sameSite: "none",
-      domain: "ksigallery.vercel.app",
+      domain: process.env.NODE_ENV === 'development' ? '.localhost' : '.vercel.app',
     });
 
     res.status(204).json({ message: "User logged out successfully", success: true });
