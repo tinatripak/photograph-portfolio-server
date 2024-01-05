@@ -14,8 +14,9 @@ router.get("/getAllBookings", GetAllBookings);
 router.get("/getBookingById/:id", GetBookingById);
 router.post("/createBooking", CreateBooking);
 router.put("/verifyBooking/:uniqueString", VerifyBooking);
-router.put("/declineBookingById/:id", checkToken, DeclineBookingById);
+
 router.put("/acceptBookingById/:id", checkToken, AcceptBookingById);
+router.put("/declineBookingById/:id", checkToken, DeclineBookingById);
 router.delete("/deleteBookingById/:id", checkToken, DeleteBookingById);
 
 module.exports = router;

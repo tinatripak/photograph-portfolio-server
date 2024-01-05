@@ -26,7 +26,10 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.3.1",
     "nodemailer": "^6.9.6",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "react-confirm-alert": "^3.0.6",
+    "start": "^5.1.0",
+    "timers": "^0.1.1"
   },
   "engines": {
     "node": ">=14.20.1"

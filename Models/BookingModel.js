@@ -9,6 +9,10 @@ const bookingSchema = new mongoose.Schema({
     type: String,
     required: [true, "The email is required"],
   },
+  phone: {
+    type: String,
+    required: [true, "The phone number is required"],
+  },
   message: {
     type: String,
   },

@@ -88,7 +88,7 @@ const GetBookingById = async (req, res) => {
 
 const CreateBooking = async (req, res) => {
   try {
-    const { name, email, message, photoTypeId, date, startTime, endTime } =
+    const { name, email, phone, message, photoTypeId, date, startTime, endTime } =
       req.body;
     const uniqueString = randString();
     const isValid = false;
@@ -101,6 +101,7 @@ const CreateBooking = async (req, res) => {
     const reservation = await Booking.create({
       name: name,
       email: email,
+      phone: phone,
       message: message,
       photoTypeId: photoTypeId,
       date: date,
@@ -127,27 +128,28 @@ const AcceptBookingById = async (req, res) => {
   try {
     const id = req.params.id;
     const existingReservation = await Booking.findById(id);
-    if (existingReservation) {
-      const reservation = await Booking.findOneAndUpdate(
-        { _id: id },
-        {
-          status: "accepted",
-        },
-        {
-          upsert: true,
-          new: true,
-        },
-      );
-      res.status(201).json({
-        message: "Booking for the photo shoot is accepted",
-        success: true,
-        data: reservation,
+
+    if (!existingReservation) {
+      return res.status(404).json({
+        success: false,
+        msg: "Booking not found",
       });
-    } else {
-      console.error("Booking doesnt exist");
     }
+
+    const reservation = await Booking.findByIdAndUpdate(
+      id,
+      { status: "accepted" },
+      { new: true }
+    );
+
+    res.status(201).json({
+      message: "Booking for the photo shoot is accepted",
+      success: true,
+      data: reservation,
+    });
   } catch (error) {
-    res.status(404).send({ success: false, msg: error });
+    console.error("Error accepting booking:", error);
+    res.status(500).json({ success: false, msg: "Internal Server Error" });
   }
 };
 
@@ -155,27 +157,28 @@ const DeclineBookingById = async (req, res) => {
   try {
     const id = req.params.id;
     const existingReservation = await Booking.findById(id);
-    if (existingReservation) {
-      const reservation = await Booking.updateOne(
-        { _id: id },
-        {
-          status: "declined",
-        },
-        {
-          upsert: true,
-          new: true,
-        },
-      );
-      res.status(201).json({
-        message: "Booking for the photo shoot is declined",
-        success: true,
-        data: reservation,
+
+    if (!existingReservation) {
+      return res.status(404).json({
+        success: false,
+        msg: "Booking not found",
       });
-    } else {
-      console.error("Booking doesnt exist");
     }
+
+    const reservation = await Booking.findByIdAndUpdate(
+      id,
+      { status: "declined" },
+      { new: true }
+    );
+
+    res.status(201).json({
+      message: "Booking for the photo shoot is declined",
+      success: true,
+      data: reservation,
+    });
   } catch (error) {
-    res.status(404).send({ success: false, msg: error });
+    console.error("Error declining booking:", error);
+    res.status(500).json({ success: false, msg: "Internal Server Error" });
   }
 };
 

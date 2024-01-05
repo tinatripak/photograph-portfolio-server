@@ -24,23 +24,31 @@ const userVerification = async (req, res) => {
 };
 
 const checkToken = (req, res, next) => {
-  const token = req.cookies.token;
+  const token = req.cookies.token || req.headers.authorization;
+
   console.log("Token:", token);
   if (!token) {
+    console.log("try again", token);
     return res.status(401).json({ message: 'Unauthorized' });
   }
 
   jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
     if (err) {
-      return res.json({ status: false, message: "Token verification failed" });
-    } else {
+      return res.status(401).json({ status: false, message: 'Token verification failed' });
+    }
+
+    try {
       const user = await User.findById(data.id);
+
       if (user) {
-        next(); 
-        return res.json({ status: true, user: user.username });
+        req.user = user;
+        next();
       } else {
-        return res.json({ status: false, message: "User not found" });
+        return res.status(401).json({ status: false, message: 'User not found' });
       }
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ status: false, message: 'Internal server error' });
     }
   });
 };
