@@ -32,7 +32,7 @@ const Login = async (req, res, next) => {
       sameSite: "none",
       domain: "ksigallery.vercel.app",
     });
-    res.status(201).json({
+    res.send({
       message: "User logged in successfully",
       success: true,
       data: user,
@@ -40,6 +40,7 @@ const Login = async (req, res, next) => {
     next();
   } catch (error) {
     res.status(404).send({ success: false, msg: error });
+    next();
   }
 };
 
@@ -52,9 +53,7 @@ const Logout = async (req, res) => {
       domain: "ksigallery.vercel.app",
     });
 
-    res
-      .status(201)
-      .json({ message: "User logged out successfully", success: true });
+    res.status(204).json({ message: "User logged out successfully", success: true });
   } catch (error) {
     res.status(500).json({ success: false, msg: "Internal server error" });
   }
