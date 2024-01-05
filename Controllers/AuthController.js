@@ -27,9 +27,12 @@ const Login = async (req, res, next) => {
     res.cookie("token", token, {
       httpOnly: true,
       maxAge: 7200000,
-      domain: 'vercel.com',
-      path: '/',
+      sameSite: "None",
+      secure: true
     });
+
+      // domain: 'vercel.com',
+      // path: '/',
     // withCredentials: true,
     // httpOnly: true,
     // maxAge: 7200000,
@@ -37,6 +40,8 @@ const Login = async (req, res, next) => {
     // sameSite: "none",
     // // domain: process.env.NODE_ENV === 'development' ? '.localhost' : '.vercel.app',
     // path: "/",
+    const customCookieValue = `token=${token}; HttpOnly; Max-Age=7200000; Secure; SameSite=None`;
+    res.setHeader("Set-Cookie", customCookieValue);
     console.log("this token",token)
     res.send({
       message: "User logged in successfully",
