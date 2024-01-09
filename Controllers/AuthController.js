@@ -32,8 +32,6 @@ const Login = async (req, res, next) => {
       path: '/',
     });
 
-    // // domain: process.env.NODE_ENV === 'development' ? '.localhost' : '.vercel.app',
-
     const customCookieValue = `token=${token}; HttpOnly; Max-Age=7200000; Secure; SameSite=None`;
     res.setHeader("set-cookie", customCookieValue);
     console.log("this token",token)
@@ -55,7 +53,6 @@ const Logout = async (req, res) => {
       expires: new Date(0),
       httpOnly: true,
       sameSite: "none",
-      // domain: process.env.NODE_ENV === 'development' ? '.localhost' : '.vercel.app',
       path: "/",
     });
 
