@@ -30,10 +30,9 @@ app.listen(PORT, () => {
 
 app.use(cors({
   origin: "https://ksigallery.vercel.app",
-  methods: "GET, POST, PUT, DELETE, OPTIONS", 
+  methods: "GET, POST, PUT, DELETE, OPTIONS",
   allowedHeaders: "Access-Control-Allow-Origin, Content-Type, Authorization",
   credentials: true,
-  exposedHeaders: ["Set-Cookie"]
 }));
 
 app.use(cookieParser());

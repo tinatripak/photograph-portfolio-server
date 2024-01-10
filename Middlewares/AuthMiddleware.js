@@ -3,25 +3,31 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 const userVerification = async (req, res) => {
-  const token = req.cookies;
-  console.log("token:", token);
+  const token = req.cookies.token;
+
+  console.log("Token:", token);
   if (!token) {
-    return res.json({ status: false, message: "No token provided" });
+    console.log("try again", token);
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 
   jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
-    
-  console.log("token env:", process.env.TOKEN_KEY);
     if (err) {
-      return res.json({ status: false, message: "Token verification failed" });
-    } else {
+      return res.status(401).json({ status: false, message: 'Token verification failed' });
+    }
+
+    try {
       const user = await User.findById(data.id);
-      console.log("User:", user);
+
       if (user) {
-        return res.json({ status: true, user: user.username });
+        req.user = user;
+        next();
       } else {
-        return res.json({ status: false, message: "User not found" });
+        return res.status(401).json({ status: false, message: 'User not found' });
       }
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ status: false, message: 'Internal server error' });
     }
   });
 };
