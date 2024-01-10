@@ -28,7 +28,7 @@ const Login = async (req, res, next) => {
       httpOnly: true,
       maxAge: 72000,
       sameSite: "None",
-      secure: true,
+      secure: true,  
     });
 
     res.send({
@@ -49,7 +49,6 @@ const Logout = async (req, res) => {
       expires: new Date(0),
       httpOnly: true,
       sameSite: "none",
-      path: "/",
     });
 
     res.status(204).json({ message: "User logged out successfully", success: true });
