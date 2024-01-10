@@ -33,13 +33,11 @@ app.use(cors({
   methods: "GET, POST, PUT, DELETE, OPTIONS", 
   allowedHeaders: "Access-Control-Allow-Origin, Content-Type, Authorization",
   credentials: true,
-  // exposedHeaders: ["Set-Cookie"]
+  exposedHeaders: ["Set-Cookie"]
 }));
 
 app.use(cookieParser());
 app.use(express.json());
-
-app.enable('trust proxy')
 
 app.use("/", authRoute);
 app.use("/home", homeRoute);
