@@ -29,12 +29,8 @@ const Login = async (req, res, next) => {
       maxAge: 72000,
       sameSite: "None",
       secure: true,
-      path: '/',
     });
 
-    const customCookieValue = `token=${token}; HttpOnly; Max-Age=7200000; Secure; SameSite=None`;
-    res.setHeader("set-cookie", customCookieValue);
-    console.log("this token",token)
     res.send({
       message: "User logged in successfully",
       success: true,
