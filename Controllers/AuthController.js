@@ -25,10 +25,10 @@ const Login = async (req, res, next) => {
 
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
-      httpOnly: true,
       maxAge: 72000,
       sameSite: "None",
       secure: true,  
+      path: '/'
     });
 
     res.send({
@@ -45,10 +45,10 @@ const Login = async (req, res, next) => {
 
 const Logout = async (req, res) => {
   try {
-    res.cookie("token", "none", {
+    res.cookie("token", null, {
       expires: new Date(0),
-      httpOnly: true,
-      sameSite: "none",
+      sameSite: "None",
+      path: '/',
     });
 
     res.status(204).json({ message: "User logged out successfully", success: true });
