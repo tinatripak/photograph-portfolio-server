@@ -39,6 +39,8 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json());
 
+app.enable('trust proxy')
+
 app.use("/", authRoute);
 app.use("/home", homeRoute);
 app.use("/admin", adminRoute); 
