@@ -28,7 +28,9 @@ const Login = async (req, res, next) => {
       maxAge: 72000,
       sameSite: "None",
       secure: true,  
-      path: '/'
+      path: '/',
+      domain: 'vercel.app',
+      httpOnly: true,
     });
 
     res.send({
@@ -49,6 +51,8 @@ const Logout = async (req, res) => {
       expires: new Date(0),
       sameSite: "None",
       path: '/',
+      domain: 'vercel.app',
+      httpOnly: true,
     });
 
     res.status(204).json({ message: "User logged out successfully", success: true });
