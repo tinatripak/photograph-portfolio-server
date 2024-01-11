@@ -28,8 +28,7 @@ const Login = async (req, res, next) => {
       maxAge: 72000,
       sameSite: "None",
       secure: true,  
-      path: '/',
-      domain: 'ksigallery.vercel.app'
+      path: '/'
     });
 
     res.send({
