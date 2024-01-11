@@ -17,27 +17,16 @@ const Login = async (req, res, next) => {
       return res.json({ message: "Incorrect password or email" });
     }
 
-    for (const cookieName in req.cookies) {
-      if (req.cookies[cookieName] === undefined) {
-        res.clearCookie(cookieName);
-      }
-    }
-
     const token = createSecretToken(user._id);
-    res.cookie("token", token, {
-      maxAge: 72000,
-      sameSite: "None",
-      secure: true,  
-      path: '/',
-    });
 
     res.send({
       message: "User logged in successfully",
       success: true,
-      data: user,
+      data: user, token,
     });
     next();
   } catch (error) {
+    console.log("error")
     res.status(404).send({ success: false, msg: error });
     next();
   }

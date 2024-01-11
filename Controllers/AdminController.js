@@ -50,11 +50,11 @@ const CreateAdmin = async (req, res, next) => {
     });
     await user.save();
 
-    const token = createSecretToken(user._id);
-    res.cookie("token", token, {
-      withCredentials: true,
-      httpOnly: false,
-    });
+    // const token = createSecretToken(user._id);
+    // res.cookie("token", token, {
+    //   withCredentials: true,
+    //   httpOnly: false,
+    // });
 
     res.status(201).json({
       message: "Admin successfully created",
