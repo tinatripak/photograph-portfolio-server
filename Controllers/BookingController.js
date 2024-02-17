@@ -27,7 +27,7 @@ const sendEmailConfirmation = (email, uniqueString) => {
       from: "tinarudenko2002@gmail.com",
       to: email,
       subject: "Booking confirmation",
-      text: `Press http://localhost:3000/verifyBooking/${uniqueString} to verify your booking by email. Thanks`,
+      text: `Press https://ksigallery.vercel.app/verifyBooking/${uniqueString} to verify your booking by email. Thanks`,
     });
   }
 };
@@ -88,8 +88,16 @@ const GetBookingById = async (req, res) => {
 
 const CreateBooking = async (req, res) => {
   try {
-    const { name, email, phone, message, photoTypeId, date, startTime, endTime } =
-      req.body;
+    const {
+      name,
+      email,
+      phone,
+      message,
+      photoTypeId,
+      date,
+      startTime,
+      endTime,
+    } = req.body;
     const uniqueString = randString();
     const isValid = false;
     const existingUser = await Booking.findOne({ email: email, date: date });
@@ -188,7 +196,9 @@ const DeleteBookingById = async (req, res) => {
       _id: req.params.id,
     });
     if (deletedRes.deletedCount === 1) {
-      res.status(200).send({ success: true, msg: "The booking has been removed" });
+      res
+        .status(200)
+        .send({ success: true, msg: "The booking has been removed" });
     } else {
       res.status(200).send({ success: false, msg: "No booking found" });
     }
@@ -209,7 +219,7 @@ const VerifyBooking = async (req, res) => {
       {
         upsert: true,
         new: true,
-      },
+      }
     );
     sendEmailWithConfirmedBooking(booking.email, booking);
     res
